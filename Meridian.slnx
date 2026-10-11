@@ -13,4 +13,7 @@
   <Folder Name="/tests/">
     <Project Path="tests/Meridian.Tests/Meridian.Tests.csproj" />
   </Folder>
+  <Folder Name="/samples/">
+    <Project Path="samples/Meridian.Harness/Meridian.Harness.csproj" />
+  </Folder>
 </Solution>

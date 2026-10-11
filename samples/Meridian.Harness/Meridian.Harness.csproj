@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Meridian.Harness</RootNamespace>
+    <AssemblyName>Meridian.Harness</AssemblyName>
+    <Description>Cross-platform (Windows/macOS/Linux) Avalonia test harness exercising every Meridian capability directly via Meridian.Hosting — no COM involved. See samples/Meridian.Harness in the repo for the Windows-only COM demo.</Description>
+
+    <!-- A sample app, not a library: it isn't published to NuGet. -->
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.2.3" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.2.3" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.3" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Meridian.Hosting\Meridian.Hosting.csproj" />
+  </ItemGroup>
+
+</Project>
