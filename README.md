@@ -10,8 +10,8 @@ Meridian is an open-source framework that brings agents, memory, tools, and larg
 
 [![.NET 10](https://img.shields.io/badge/.NET-10-512BD4?style=flat&logo=dotnet)](https://dotnet.microsoft.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat)](LICENSE)
-[![NuGet](https://img.shields.io/nuget/v/NeuroForge?style=flat&logo=nuget)](https://www.nuget.org/packages/NeuroForge)
-[![Tests](https://img.shields.io/badge/tests-3%2C100%2B%20lines-brightgreen?style=flat)](src/dotnet/NeuroForge.Testing)
+[![NuGet](https://img.shields.io/nuget/v/Meridian.Hosting?style=flat&logo=nuget)](https://www.nuget.org/packages/Meridian.Hosting)
+[![Tests](https://img.shields.io/badge/tests-32%20passing-brightgreen?style=flat)](tests/Meridian.Tests)
 
 An opinionated .NET 10 agent framework built on the [Microsoft Agent Framework](https://learn.microsoft.com/agent-framework/) (MAF). Meridian wires up multi-provider models, embeddings/retrieval, agents/tools/memory/workflows, and observability behind one fluent, ASP.NET-style registration call — then exposes the same functionality to legacy COM clients (VB6, Visual FoxPro, Delphi, VBA) through a CCW.
 
@@ -21,7 +21,7 @@ An opinionated .NET 10 agent framework built on the [Microsoft Agent Framework](
 using Meridian.Hosting;
 
 services.AddMeridian(options => {
-    options.AddModel(model => {m
+    options.AddModel(model => {
         model.DefaultProvider = ModelProvider.AzureOpenAI;
         model.AzureOpenAI.ResourceName = "my-resource";
         model.AzureOpenAI.ChatDeploymentName = "gpt-4o";
