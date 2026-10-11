@@ -18,7 +18,7 @@
     <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.3" />
     <!-- Meridian.Hosting only brings in Microsoft.Extensions.DependencyInjection.Abstractions (IServiceCollection);
          the harness builds its own container (new ServiceCollection() + BuildServiceProvider()), so it needs the
-         concrete implementation package too -- same as Meridian.Interop.Com does for the same reason. -->
+         concrete implementation package too, same as Meridian.Interop.Com does for the same reason. -->
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.4" />
   </ItemGroup>
 
