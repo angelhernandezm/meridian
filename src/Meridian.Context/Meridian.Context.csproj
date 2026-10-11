@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Meridian.Context</AssemblyName>
+    <RootNamespace>Meridian.Context</RootNamespace>
+    <Description>Ambient execution context primitives shared across every Meridian subsystem.</Description>
+  </PropertyGroup>
+
+</Project>

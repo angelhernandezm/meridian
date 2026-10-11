@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Meridian.Observability</AssemblyName>
+    <RootNamespace>Meridian.Observability</RootNamespace>
+    <Description>Tracing (ActivitySource), metrics (Meter) and lightweight response evaluation shared across Meridian.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Meridian.Context\Meridian.Context.csproj" />
+  </ItemGroup>
+
+</Project>

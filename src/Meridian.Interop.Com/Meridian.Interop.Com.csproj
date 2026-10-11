@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Meridian.Interop.Com</AssemblyName>
+    <RootNamespace>Meridian.Interop.Com</RootNamespace>
+    <Description>Exposes Meridian's chat, embedding, memory and agent functionality as a COM Callable Wrapper (CCW) for legacy COM clients: VB6, Visual FoxPro, Delphi, and VBA.</Description>
+
+    <!-- COM hosting (CCW) is a Windows-only, non-AOT feature: it needs the classic reflection-based COM
+         interop marshaler, which NativeAOT/trimmed publishes replace with source-generated interop. -->
+    <EnableComHosting>true</EnableComHosting>
+    <PublishAot>false</PublishAot>
+    <SelfContained>false</SelfContained>
+
+    <!-- VB6 and Visual FoxPro 9 are 32-bit only; Delphi and VBA (Office) match the host process's bitness,
+         which is commonly also 32-bit. Build/publish both so either kind of host can load the right one. -->
+    <Platforms>x86;x64</Platforms>
+    <RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
+
+    <!-- COM-visible types opt in individually via [ComVisible(true)]; everything else stays invisible to COM. -->
+    <ComVisible>false</ComVisible>
+
+    <!-- Not published to NuGet: the comhost artifact is RID-specific and produced by `dotnet publish`,
+         not something consumers reference as a library. See COM-INTEROP.md for publish/registration steps. -->
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Meridian.Context\Meridian.Context.csproj" />
+    <ProjectReference Include="..\Meridian.Models\Meridian.Models.csproj" />
+    <ProjectReference Include="..\Meridian.Knowledge\Meridian.Knowledge.csproj" />
+    <ProjectReference Include="..\Meridian.Agents\Meridian.Agents.csproj" />
+    <ProjectReference Include="..\Meridian.Observability\Meridian.Observability.csproj" />
+    <ProjectReference Include="..\Meridian.Hosting\Meridian.Hosting.csproj" />
+  </ItemGroup>
+
+</Project>

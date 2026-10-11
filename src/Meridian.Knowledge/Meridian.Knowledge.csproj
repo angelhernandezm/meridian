@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Meridian.Knowledge</AssemblyName>
+    <RootNamespace>Meridian.Knowledge</RootNamespace>
+    <Description>Embeddings, a pluggable semantic store, and retrieval (RAG) built on top of Meridian.Models.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.AI" Version="10.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Meridian.Context\Meridian.Context.csproj" />
+    <ProjectReference Include="..\Meridian.Models\Meridian.Models.csproj" />
+    <ProjectReference Include="..\Meridian.Observability\Meridian.Observability.csproj" />
+  </ItemGroup>
+
+</Project>
