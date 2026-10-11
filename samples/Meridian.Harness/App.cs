@@ -33,8 +33,8 @@
 
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Styling;
+using Avalonia.Themes.Fluent;
 
 namespace Meridian.Harness;
 

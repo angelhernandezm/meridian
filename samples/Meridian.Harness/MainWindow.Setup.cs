@@ -35,6 +35,7 @@
 
 using Avalonia.Controls;
 using Avalonia.Layout;
+using Avalonia.Media;
 using Meridian.Agents.Agents;
 using Meridian.Hosting;
 using Meridian.Models.Providers;
