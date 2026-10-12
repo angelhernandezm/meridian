@@ -67,6 +67,14 @@ internal static class MeridianComHost {
             options.AddRagContextBuilder();
             options.AddMemory();
             options.AddImages();
+
+            // The COM surface's one built-in agent, reachable as CreateObject("Meridian.AgentService")
+            // .CreateSession("assistant"). A COM caller can't run the C# fluent builder to register its
+            // own agents, so this is the one every VB6/VFP/Delphi/VBA host gets by default.
+            options.AddAgent("assistant", agent => {
+                agent.Instructions = "You are a concise, helpful assistant.";
+                agent.EnableSearchTool = true;
+            });
         });
 
         return services.BuildServiceProvider();
