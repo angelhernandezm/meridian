@@ -37,9 +37,23 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Meridian.Harness;
 
+/// <summary>
+/// Class MainWindow.
+/// Implements the <see cref="Window" />
+/// </summary>
+/// <seealso cref="Window" />
 partial class MainWindow {
+    /// <summary>
+    /// The chat instructions
+    /// </summary>
     private readonly TextBox _chatInstructions = new() { AcceptsReturn = true, Height = 50, Watermark = "System instructions (optional)" };
+    /// <summary>
+    /// The chat prompt
+    /// </summary>
     private readonly TextBox _chatPrompt = new() { AcceptsReturn = true, Height = 70, Watermark = "Your message" };
+    /// <summary>
+    /// The chat output
+    /// </summary>
     private readonly TextBox _chatOutput = Output(220);
 
     /// <summary>
@@ -61,6 +75,10 @@ partial class MainWindow {
         return new TabItem { Header = "Chat", Content = Page(root) };
     }
 
+    /// <summary>
+    /// Send chat as an asynchronous operation.
+    /// </summary>
+    /// <returns>A Task representing the asynchronous operation.</returns>
     private async Task SendChatAsync() {
         if (!RequireServices(_chatOutput))
             return;

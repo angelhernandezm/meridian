@@ -41,29 +41,88 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Meridian.Harness;
 
+/// <summary>
+/// Class MainWindow.
+/// Implements the <see cref="Window" />
+/// </summary>
+/// <seealso cref="Window" />
 partial class MainWindow {
     // ---- Generate ---------------------------------------------------------------
+    /// <summary>
+    /// The generate prompt
+    /// </summary>
     private readonly TextBox _generatePrompt = new() { AcceptsReturn = true, Height = 50, Watermark = "Generation prompt" };
+    /// <summary>
+    /// The generate width
+    /// </summary>
     private readonly NumericUpDown _generateWidth = new() { Value = 1024, Minimum = 256, Maximum = 2048, Increment = 64, Width = 100 };
+    /// <summary>
+    /// The generate height
+    /// </summary>
     private readonly NumericUpDown _generateHeight = new() { Value = 1024, Minimum = 256, Maximum = 2048, Increment = 64, Width = 100 };
+    /// <summary>
+    /// The generate preview
+    /// </summary>
     private readonly Image _generatePreview = new() { Stretch = Avalonia.Media.Stretch.Uniform, MaxHeight = 280, HorizontalAlignment = HorizontalAlignment.Left };
+    /// <summary>
+    /// The images status
+    /// </summary>
     private readonly TextBox _imagesStatus = Output(60);
+    /// <summary>
+    /// The last generated
+    /// </summary>
     private GeneratedImage? _lastGenerated;
 
     // ---- Edit -----------------------------------------------------------------
+    /// <summary>
+    /// The edit source preview
+    /// </summary>
     private readonly Image _editSourcePreview = new() { Stretch = Avalonia.Media.Stretch.Uniform, MaxHeight = 160, HorizontalAlignment = HorizontalAlignment.Left };
+    /// <summary>
+    /// The edit result preview
+    /// </summary>
     private readonly Image _editResultPreview = new() { Stretch = Avalonia.Media.Stretch.Uniform, MaxHeight = 160, HorizontalAlignment = HorizontalAlignment.Left };
+    /// <summary>
+    /// The edit prompt
+    /// </summary>
     private readonly TextBox _editPrompt = new() { AcceptsReturn = true, Height = 50, Watermark = "Edit instructions" };
+    /// <summary>
+    /// The edit width
+    /// </summary>
     private readonly NumericUpDown _editWidth = new() { Value = 1024, Minimum = 256, Maximum = 2048, Increment = 64, Width = 100 };
+    /// <summary>
+    /// The edit height
+    /// </summary>
     private readonly NumericUpDown _editHeight = new() { Value = 1024, Minimum = 256, Maximum = 2048, Increment = 64, Width = 100 };
+    /// <summary>
+    /// The edit source bytes
+    /// </summary>
     private byte[]? _editSourceBytes;
+    /// <summary>
+    /// The last edited
+    /// </summary>
     private GeneratedImage? _lastEdited;
 
     // ---- Analyze --------------------------------------------------------------
+    /// <summary>
+    /// The analyze preview
+    /// </summary>
     private readonly Image _analyzePreview = new() { Stretch = Avalonia.Media.Stretch.Uniform, MaxHeight = 160, HorizontalAlignment = HorizontalAlignment.Left };
+    /// <summary>
+    /// The analyze prompt
+    /// </summary>
     private readonly TextBox _analyzePrompt = new() { Watermark = "Question about the image" };
+    /// <summary>
+    /// The analyze output
+    /// </summary>
     private readonly TextBox _analyzeOutput = Output(80);
+    /// <summary>
+    /// The analyze source bytes
+    /// </summary>
     private byte[]? _analyzeSourceBytes;
+    /// <summary>
+    /// The analyze media type
+    /// </summary>
     private string _analyzeMediaType = "image/png";
 
     /// <summary>
@@ -132,6 +191,10 @@ partial class MainWindow {
         return new TabItem { Header = "Images", Content = Page(root) };
     }
 
+    /// <summary>
+    /// Generate as an asynchronous operation.
+    /// </summary>
+    /// <returns>A Task representing the asynchronous operation.</returns>
     private async Task GenerateAsync() {
         if (!RequireServices(_imagesStatus))
             return;
@@ -151,6 +214,10 @@ partial class MainWindow {
         _imagesStatus.Text = $"Generated {result.Data.Length:N0} bytes ({result.MediaType}).";
     }
 
+    /// <summary>
+    /// Load edit source as an asynchronous operation.
+    /// </summary>
+    /// <returns>A Task representing the asynchronous operation.</returns>
     private async Task LoadEditSourceAsync() {
         var bytes = await PickImageFileAsync("Select an image to edit").ConfigureAwait(true);
         if (bytes is null)
@@ -161,6 +228,10 @@ partial class MainWindow {
         _imagesStatus.Text = $"Loaded source image ({bytes.Length:N0} bytes).";
     }
 
+    /// <summary>
+    /// Edit as an asynchronous operation.
+    /// </summary>
+    /// <returns>A Task representing the asynchronous operation.</returns>
     private async Task EditAsync() {
         if (!RequireServices(_imagesStatus))
             return;
@@ -184,6 +255,10 @@ partial class MainWindow {
         _imagesStatus.Text = $"Edited image: {result.Data.Length:N0} bytes ({result.MediaType}).";
     }
 
+    /// <summary>
+    /// Load analyze source as an asynchronous operation.
+    /// </summary>
+    /// <returns>A Task representing the asynchronous operation.</returns>
     private async Task LoadAnalyzeSourceAsync() {
         var bytes = await PickImageFileAsync("Select an image to analyze", reportMediaType: mediaType => _analyzeMediaType = mediaType).ConfigureAwait(true);
         if (bytes is null)
@@ -194,6 +269,10 @@ partial class MainWindow {
         _imagesStatus.Text = $"Loaded image to analyze ({bytes.Length:N0} bytes).";
     }
 
+    /// <summary>
+    /// Analyze as an asynchronous operation.
+    /// </summary>
+    /// <returns>A Task representing the asynchronous operation.</returns>
     private async Task AnalyzeAsync() {
         if (!RequireServices(_analyzeOutput))
             return;

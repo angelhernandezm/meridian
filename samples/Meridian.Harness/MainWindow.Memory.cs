@@ -38,11 +38,31 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Meridian.Harness;
 
+/// <summary>
+/// Class MainWindow.
+/// Implements the <see cref="Window" />
+/// </summary>
+/// <seealso cref="Window" />
 partial class MainWindow {
+    /// <summary>
+    /// The remember text
+    /// </summary>
     private readonly TextBox _rememberText = new() { AcceptsReturn = true, Height = 60, Watermark = "Fact to remember" };
+    /// <summary>
+    /// The recall query
+    /// </summary>
     private readonly TextBox _recallQuery = new() { Watermark = "Recall query" };
+    /// <summary>
+    /// The recall top k
+    /// </summary>
     private readonly NumericUpDown _recallTopK = new() { Value = 5, Minimum = 1, Maximum = 50, Width = 90 };
+    /// <summary>
+    /// The forget identifier
+    /// </summary>
     private readonly TextBox _forgetId = new() { Watermark = "Id to forget" };
+    /// <summary>
+    /// The memory output
+    /// </summary>
     private readonly TextBox _memoryOutput = Output(200);
 
     /// <summary>
@@ -79,6 +99,10 @@ partial class MainWindow {
         return new TabItem { Header = "Memory", Content = Page(root) };
     }
 
+    /// <summary>
+    /// Remember as an asynchronous operation.
+    /// </summary>
+    /// <returns>A Task representing the asynchronous operation.</returns>
     private async Task RememberAsync() {
         if (!RequireServices(_memoryOutput))
             return;
@@ -94,6 +118,10 @@ partial class MainWindow {
         _rememberText.Text = string.Empty;
     }
 
+    /// <summary>
+    /// Recall as an asynchronous operation.
+    /// </summary>
+    /// <returns>A Task representing the asynchronous operation.</returns>
     private async Task RecallAsync() {
         if (!RequireServices(_memoryOutput))
             return;
@@ -112,6 +140,10 @@ partial class MainWindow {
             : string.Join("\n\n", results.Select(m => $"id={m.Id} score={m.Score:F4}\n{m.Text}"));
     }
 
+    /// <summary>
+    /// Forget as an asynchronous operation.
+    /// </summary>
+    /// <returns>A Task representing the asynchronous operation.</returns>
     private async Task ForgetAsync() {
         if (!RequireServices(_memoryOutput))
             return;

@@ -37,12 +37,32 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Meridian.Harness;
 
+/// <summary>
+/// Class MainWindow.
+/// Implements the <see cref="Window" />
+/// </summary>
+/// <seealso cref="Window" />
 partial class MainWindow {
+    /// <summary>
+    /// The embed text a
+    /// </summary>
     private readonly TextBox _embedTextA = new() { AcceptsReturn = true, Height = 60, Watermark = "Text A" };
+    /// <summary>
+    /// The embed text b
+    /// </summary>
     private readonly TextBox _embedTextB = new() { AcceptsReturn = true, Height = 60, Watermark = "Text B" };
+    /// <summary>
+    /// The embed output
+    /// </summary>
     private readonly TextBox _embedOutput = Output(160);
 
+    /// <summary>
+    /// The last vector a
+    /// </summary>
     private float[]? _lastVectorA;
+    /// <summary>
+    /// The last vector b
+    /// </summary>
     private float[]? _lastVectorB;
 
     /// <summary>
@@ -72,6 +92,12 @@ partial class MainWindow {
         return new TabItem { Header = "Embeddings", Content = Page(root) };
     }
 
+    /// <summary>
+    /// Embed as an asynchronous operation.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <param name="label">The label.</param>
+    /// <returns>A Task&lt;System.Single[]&gt; representing the asynchronous operation.</returns>
     private async Task<float[]?> EmbedAsync(string? text, string label) {
         if (!RequireServices(_embedOutput))
             return null;
@@ -87,6 +113,10 @@ partial class MainWindow {
         return vector;
     }
 
+    /// <summary>
+    /// Compare as an asynchronous operation.
+    /// </summary>
+    /// <returns>A Task representing the asynchronous operation.</returns>
     private async Task CompareAsync() {
         if (!RequireServices(_embedOutput))
             return;

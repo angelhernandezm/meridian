@@ -36,7 +36,13 @@ using Avalonia.Controls;
 namespace Meridian.Harness;
 
 partial class MainWindow {
+    /// <summary>
+    /// The agent transcript
+    /// </summary>
     private readonly TextBox _agentTranscript = Output(260);
+    /// <summary>
+    /// The agent message
+    /// </summary>
     private readonly TextBox _agentMessage = new() { Watermark = "Message to the agent" };
 
     /// <summary>
@@ -61,6 +67,10 @@ partial class MainWindow {
         return new TabItem { Header = "Agent", Content = Page(root) };
     }
 
+    /// <summary>
+    /// New agent session as an asynchronous operation.
+    /// </summary>
+    /// <returns>A Task representing the asynchronous operation.</returns>
     private async Task NewAgentSessionAsync() {
         if (!RequireServices(_agentTranscript))
             return;
@@ -69,6 +79,10 @@ partial class MainWindow {
         _agentTranscript.Text = "New session started.";
     }
 
+    /// <summary>
+    /// Send agent message as an asynchronous operation.
+    /// </summary>
+    /// <returns>A Task representing the asynchronous operation.</returns>
     private async Task SendAgentMessageAsync() {
         if (!RequireServices(_agentTranscript))
             return;

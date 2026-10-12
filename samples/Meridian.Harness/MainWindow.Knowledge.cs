@@ -40,15 +40,41 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Meridian.Harness;
 
+/// <summary>
+/// Class MainWindow.
+/// Implements the <see cref="Window" />
+/// </summary>
+/// <seealso cref="Window" />
 partial class MainWindow {
+    /// <summary>
+    /// The ingest identifier
+    /// </summary>
     private readonly TextBox _ingestId = new() { Watermark = "Id (optional -- auto-generated if blank)" };
+    /// <summary>
+    /// The ingest text
+    /// </summary>
     private readonly TextBox _ingestText = new() { AcceptsReturn = true, Height = 70, Watermark = "Text to add to the knowledge base" };
+    /// <summary>
+    /// The knowledge output
+    /// </summary>
     private readonly TextBox _knowledgeOutput = Output(220);
 
+    /// <summary>
+    /// The retrieve query
+    /// </summary>
     private readonly TextBox _retrieveQuery = new() { Watermark = "Search query" };
+    /// <summary>
+    /// The retrieve top k
+    /// </summary>
     private readonly NumericUpDown _retrieveTopK = new() { Value = 5, Minimum = 1, Maximum = 50, Width = 90 };
 
+    /// <summary>
+    /// The rag query
+    /// </summary>
     private readonly TextBox _ragQuery = new() { Watermark = "Question to answer with RAG" };
+    /// <summary>
+    /// The rag top k
+    /// </summary>
     private readonly NumericUpDown _ragTopK = new() { Value = 5, Minimum = 1, Maximum = 50, Width = 90 };
 
     /// <summary>
@@ -92,6 +118,10 @@ partial class MainWindow {
         return new TabItem { Header = "Knowledge / RAG", Content = Page(root) };
     }
 
+    /// <summary>
+    /// Ingest as an asynchronous operation.
+    /// </summary>
+    /// <returns>A Task representing the asynchronous operation.</returns>
     private async Task IngestAsync() {
         if (!RequireServices(_knowledgeOutput))
             return;
@@ -113,6 +143,10 @@ partial class MainWindow {
         _ingestText.Text = string.Empty;
     }
 
+    /// <summary>
+    /// Retrieve as an asynchronous operation.
+    /// </summary>
+    /// <returns>A Task representing the asynchronous operation.</returns>
     private async Task RetrieveAsync() {
         if (!RequireServices(_knowledgeOutput))
             return;
@@ -131,6 +165,10 @@ partial class MainWindow {
             : string.Join("\n\n", results.Select((r, i) => $"[{i + 1}] score={r.Score:F4} id={r.Id}\n{r.Text}"));
     }
 
+    /// <summary>
+    /// Build rag prompt as an asynchronous operation.
+    /// </summary>
+    /// <returns>A Task representing the asynchronous operation.</returns>
     private async Task BuildRagPromptAsync() {
         if (!RequireServices(_knowledgeOutput))
             return;

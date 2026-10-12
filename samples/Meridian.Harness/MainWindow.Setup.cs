@@ -43,63 +43,176 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Meridian.Harness;
 
+/// <summary>
+/// Class MainWindow.
+/// Implements the <see cref="Window" />
+/// </summary>
+/// <seealso cref="Window" />
 partial class MainWindow {
     // ---- Provider selection -------------------------------------------------
+    /// <summary>
+    /// The default provider combo
+    /// </summary>
     private readonly ComboBox _defaultProviderCombo = new() {
         ItemsSource = new[] { ModelProvider.OpenAI, ModelProvider.AzureOpenAI, ModelProvider.Anthropic, ModelProvider.Gemini, ModelProvider.Perplexity, ModelProvider.AzureAIInference },
         SelectedIndex = 0
     };
+    /// <summary>
+    /// The fallback checks
+    /// </summary>
     private readonly Dictionary<ModelProvider, CheckBox> _fallbackChecks = new();
 
     // ---- Per-provider credential fields --------------------------------------
+    /// <summary>
+    /// The open ai key
+    /// </summary>
     private readonly TextBox _openAiKey = new() { PasswordChar = '●', Watermark = $"blank = use {ModelDefaults.EnvironmentVariables.OpenAIApiKey}" };
+    /// <summary>
+    /// The open ai chat model
+    /// </summary>
     private readonly TextBox _openAiChatModel = new() { Watermark = ModelDefaults.OpenAIDefaultChatModel };
+    /// <summary>
+    /// The open ai embedding model
+    /// </summary>
     private readonly TextBox _openAiEmbeddingModel = new() { Watermark = ModelDefaults.OpenAIDefaultEmbeddingModel };
+    /// <summary>
+    /// The open ai image model
+    /// </summary>
     private readonly TextBox _openAiImageModel = new() { Watermark = ModelDefaults.OpenAIDefaultImageModel };
 
+    /// <summary>
+    /// The anthropic key
+    /// </summary>
     private readonly TextBox _anthropicKey = new() { PasswordChar = '●', Watermark = $"blank = use {ModelDefaults.EnvironmentVariables.AnthropicApiKey}" };
+    /// <summary>
+    /// The anthropic chat model
+    /// </summary>
     private readonly TextBox _anthropicChatModel = new() { Watermark = ModelDefaults.AnthropicDefaultChatModel };
 
+    /// <summary>
+    /// The gemini key
+    /// </summary>
     private readonly TextBox _geminiKey = new() { PasswordChar = '●', Watermark = $"blank = use {ModelDefaults.EnvironmentVariables.GeminiApiKey}" };
+    /// <summary>
+    /// The gemini chat model
+    /// </summary>
     private readonly TextBox _geminiChatModel = new() { Watermark = ModelDefaults.GeminiDefaultChatModel };
+    /// <summary>
+    /// The gemini embedding model
+    /// </summary>
     private readonly TextBox _geminiEmbeddingModel = new() { Watermark = ModelDefaults.GeminiDefaultEmbeddingModel };
 
+    /// <summary>
+    /// The perplexity key
+    /// </summary>
     private readonly TextBox _perplexityKey = new() { PasswordChar = '●', Watermark = $"blank = use {ModelDefaults.EnvironmentVariables.PerplexityApiKey}" };
+    /// <summary>
+    /// The perplexity chat model
+    /// </summary>
     private readonly TextBox _perplexityChatModel = new() { Watermark = ModelDefaults.PerplexityDefaultChatModel };
 
+    /// <summary>
+    /// The azure open ai key
+    /// </summary>
     private readonly TextBox _azureOpenAiKey = new() { PasswordChar = '●', Watermark = $"blank = use {ModelDefaults.EnvironmentVariables.AzureOpenAIApiKey}" };
+    /// <summary>
+    /// The azure open ai resource
+    /// </summary>
     private readonly TextBox _azureOpenAiResource = new() { Watermark = "my-resource" };
+    /// <summary>
+    /// The azure open ai chat deployment
+    /// </summary>
     private readonly TextBox _azureOpenAiChatDeployment = new() { Watermark = "gpt-4o" };
+    /// <summary>
+    /// The azure open ai embedding deployment
+    /// </summary>
     private readonly TextBox _azureOpenAiEmbeddingDeployment = new() { Watermark = "text-embedding-3-small" };
+    /// <summary>
+    /// The azure open ai image deployment
+    /// </summary>
     private readonly TextBox _azureOpenAiImageDeployment = new() { Watermark = "gpt-image-1 (optional)" };
+    /// <summary>
+    /// The azure open ai use aad
+    /// </summary>
     private readonly CheckBox _azureOpenAiUseAad = new() { Content = "Use Azure AD instead of an API key" };
 
+    /// <summary>
+    /// The azure ai inference key
+    /// </summary>
     private readonly TextBox _azureAiInferenceKey = new() { PasswordChar = '●', Watermark = $"blank = use {ModelDefaults.EnvironmentVariables.AzureAIInferenceApiKey}" };
+    /// <summary>
+    /// The azure ai inference endpoint
+    /// </summary>
     private readonly TextBox _azureAiInferenceEndpoint = new() { Watermark = "https://your-resource.services.ai.azure.com/models" };
+    /// <summary>
+    /// The azure ai inference chat model
+    /// </summary>
     private readonly TextBox _azureAiInferenceChatModel = new();
+    /// <summary>
+    /// The azure ai inference embedding model
+    /// </summary>
     private readonly TextBox _azureAiInferenceEmbeddingModel = new();
 
     // ---- Pipeline -------------------------------------------------------------
+    /// <summary>
+    /// The enable retry
+    /// </summary>
     private readonly CheckBox _enableRetry = new() { Content = "Retry transient failures", IsChecked = true };
+    /// <summary>
+    /// The enable open telemetry
+    /// </summary>
     private readonly CheckBox _enableOpenTelemetry = new() { Content = "OpenTelemetry tracing" };
 
     // ---- Knowledge --------------------------------------------------------------
+    /// <summary>
+    /// The enable embeddings
+    /// </summary>
     private readonly CheckBox _enableEmbeddings = new() { Content = "Embeddings (required by Retrieval, Memory, and the Embeddings tab)", IsChecked = true };
+    /// <summary>
+    /// The retrieval none
+    /// </summary>
     private readonly RadioButton _retrievalNone = new() { Content = "None", GroupName = "retrieval" };
+    /// <summary>
+    /// The retrieval semantic
+    /// </summary>
     private readonly RadioButton _retrievalSemantic = new() { Content = "Semantic only", GroupName = "retrieval" };
+    /// <summary>
+    /// The retrieval hybrid
+    /// </summary>
     private readonly RadioButton _retrievalHybrid = new() { Content = "Hybrid (semantic + keyword)", GroupName = "retrieval", IsChecked = true };
+    /// <summary>
+    /// The enable rag builder
+    /// </summary>
     private readonly CheckBox _enableRagBuilder = new() { Content = "RAG context builder (requires retrieval)", IsChecked = true };
+    /// <summary>
+    /// The enable memory
+    /// </summary>
     private readonly CheckBox _enableMemory = new() { Content = "Long-term memory (requires embeddings)", IsChecked = true };
+    /// <summary>
+    /// The enable images
+    /// </summary>
     private readonly CheckBox _enableImages = new() { Content = "Images: generation, editing, vision analysis (OpenAI/Azure OpenAI only)", IsChecked = true };
 
     // ---- Assistant agent --------------------------------------------------------
+    /// <summary>
+    /// The agent instructions
+    /// </summary>
     private readonly TextBox _agentInstructions = new() {
         AcceptsReturn = true, TextWrapping = TextWrapping.Wrap, Height = 60,
         Text = "You are a concise, helpful assistant."
     };
+    /// <summary>
+    /// The agent search tool
+    /// </summary>
     private readonly CheckBox _agentSearchTool = new() { Content = "Attach knowledge-search tool (requires retrieval)" };
+    /// <summary>
+    /// The agent sample tool
+    /// </summary>
     private readonly CheckBox _agentSampleTool = new() { Content = "Register sample \"getWeather\" tool and give it to the agent" };
 
+    /// <summary>
+    /// The setup status
+    /// </summary>
     private readonly TextBox _setupStatus = Output(70);
 
     /// <summary>
@@ -175,6 +288,10 @@ partial class MainWindow {
         return row;
     }
 
+    /// <summary>
+    /// Opens the ai panel.
+    /// </summary>
+    /// <returns>Control.</returns>
     private Control OpenAiPanel() {
         var p = Stack(6);
         p.Children.Add(LabeledRow("API key", _openAiKey));
@@ -184,6 +301,10 @@ partial class MainWindow {
         return p;
     }
 
+    /// <summary>
+    /// Anthropics the panel.
+    /// </summary>
+    /// <returns>Control.</returns>
     private Control AnthropicPanel() {
         var p = Stack(6);
         p.Children.Add(LabeledRow("API key", _anthropicKey));
@@ -192,6 +313,10 @@ partial class MainWindow {
         return p;
     }
 
+    /// <summary>
+    /// Geminis the panel.
+    /// </summary>
+    /// <returns>Control.</returns>
     private Control GeminiPanel() {
         var p = Stack(6);
         p.Children.Add(LabeledRow("API key", _geminiKey));
@@ -201,6 +326,10 @@ partial class MainWindow {
         return p;
     }
 
+    /// <summary>
+    /// Perplexities the panel.
+    /// </summary>
+    /// <returns>Control.</returns>
     private Control PerplexityPanel() {
         var p = Stack(6);
         p.Children.Add(LabeledRow("API key", _perplexityKey));
@@ -209,6 +338,10 @@ partial class MainWindow {
         return p;
     }
 
+    /// <summary>
+    /// Azures the open ai panel.
+    /// </summary>
+    /// <returns>Control.</returns>
     private Control AzureOpenAiPanel() {
         var p = Stack(6);
         p.Children.Add(LabeledRow("API key", _azureOpenAiKey));
@@ -220,6 +353,10 @@ partial class MainWindow {
         return p;
     }
 
+    /// <summary>
+    /// Azures the ai inference panel.
+    /// </summary>
+    /// <returns>Control.</returns>
     private Control AzureAiInferencePanel() {
         var p = Stack(6);
         p.Children.Add(LabeledRow("API key", _azureAiInferenceKey));
