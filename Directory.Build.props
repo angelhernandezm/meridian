@@ -29,8 +29,13 @@
     <PackageOutputPath>$(MSBuildThisFileDirectory)artifacts\packages</PackageOutputPath>
   </PropertyGroup>
 
-  <!-- Every package ships the repo root README as its NuGet.org/VS readme. -->
-  <ItemGroup Condition="'$(IsPackable)' == 'true' and Exists('$(MSBuildThisFileDirectory)README.md')">
+  <!-- Each package ships its own README.md as its NuGet.org/VS readme, describing just that
+       package rather than the whole framework. Falls back to the repo root README for any
+       packable project that doesn't have its own (there currently isn't one). -->
+  <ItemGroup Condition="'$(IsPackable)' == 'true' and Exists('$(MSBuildProjectDirectory)\README.md')">
+    <None Include="$(MSBuildProjectDirectory)\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(IsPackable)' == 'true' and !Exists('$(MSBuildProjectDirectory)\README.md') and Exists('$(MSBuildThisFileDirectory)README.md')">
     <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
