@@ -1,5 +1,8 @@
 # Meridian.Context
 
+> [!NOTE]
+> Independent open-source project; not affiliated with or endorsed by Microsoft.
+
 The ambient execution context shared across every Meridian package — a small, dependency-free
 foundation package most apps won't reference directly (it comes in transitively via
 [`Meridian.Hosting`](https://www.nuget.org/packages/Meridian.Hosting)).

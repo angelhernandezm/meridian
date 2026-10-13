@@ -1,5 +1,8 @@
 # Meridian.Observability
 
+> [!NOTE]
+> Independent open-source project; not affiliated with or endorsed by Microsoft.
+
 Domain-shaped tracing, metrics, and evaluation for .NET AI applications — one `ActivitySource`
 and one `Meter` shared across every Meridian subsystem, so a host wires one OpenTelemetry exporter
 and gets request counts, token usage, latency, and retrieval hit counts out of the box, not just

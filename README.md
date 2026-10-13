@@ -13,6 +13,9 @@ Meridian is an open-source framework that brings agents, memory, tools, and larg
 [![NuGet](https://img.shields.io/nuget/v/Meridian.Hosting?style=flat&logo=nuget)](https://www.nuget.org/packages/Meridian.Hosting)
 [![Tests](https://img.shields.io/badge/tests-32%20passing-brightgreen?style=flat)](tests/Meridian.Tests)
 
+> [!NOTE]
+> Independent open-source project; not affiliated with or endorsed by Microsoft.
+
 An opinionated .NET 10 agent framework built on the [Microsoft Agent Framework](https://learn.microsoft.com/agent-framework/) (MAF). Meridian wires up multi-provider models, embeddings/retrieval, agents/tools/memory/workflows, and observability behind one fluent, ASP.NET-style registration call — then exposes the same functionality to legacy COM clients (VB6, Visual FoxPro, Delphi, VBA) through a CCW.
 
 ## Quick start

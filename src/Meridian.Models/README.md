@@ -1,5 +1,8 @@
 # Meridian.Models
 
+> [!NOTE]
+> Independent open-source project; not affiliated with or endorsed by Microsoft.
+
 Multi-provider chat, embedding, and image model clients for .NET — one strongly-typed
 `ModelOptions` configuration, the same `IChatClient`/`IEmbeddingGenerator`/`IImageGenerator`
 surface from [Microsoft.Extensions.AI](https://www.nuget.org/packages/Microsoft.Extensions.AI)

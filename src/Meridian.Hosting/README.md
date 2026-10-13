@@ -1,5 +1,8 @@
 # Meridian.Hosting
 
+> [!NOTE]
+> Independent open-source project; not affiliated with or endorsed by Microsoft.
+
 The `services.AddMeridian(...)` front door — one fluent registration call that wires up
 multi-provider models, embeddings/retrieval, agents/tools/memory/workflows, and observability.
 Referencing this package alone pulls in the entire Meridian stack

@@ -1,5 +1,8 @@
 # Meridian.Agents
 
+> [!NOTE]
+> Independent open-source project; not affiliated with or endorsed by Microsoft.
+
 Tools, long-term memory, sequential workflows, and named agent registration for .NET, built on
 the [Microsoft Agent Framework](https://learn.microsoft.com/agent-framework/) (MAF). Resolve an
 agent by name without taking a dependency on how it's configured or which model provider backs

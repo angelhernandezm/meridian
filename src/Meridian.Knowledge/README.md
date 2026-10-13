@@ -1,5 +1,8 @@
 # Meridian.Knowledge
 
+> [!NOTE]
+> Independent open-source project; not affiliated with or endorsed by Microsoft.
+
 Embeddings, a pluggable vector store, and retrieval-augmented generation for .NET — semantic
 search, hybrid (vector + keyword) search, and a batteries-included RAG pipeline that turns a
 query straight into a ready-to-send, cited prompt.
